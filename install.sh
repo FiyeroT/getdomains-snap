@@ -6,7 +6,7 @@ printf "\033[32;1mInstalling packeges\033[0m\n"
 opkg update && opkg install curl kmod-nft-tproxy xray-core 
 
 printf "\033[32;1mDownloading config.json\033[0m\n"
-curl -Lo /etc/xray/config.json https://github.com/FiyeroT/getdomains-snap/releases/latest/download/config.json
+curl -Lo /etc/xray/config.json https://raw.githubusercontent.com/FiyeroT/getdomains-snap/main/config.json
 
 printf "\033[32;1mEnabling xray service\033[0m\n"
 uci set xray.enabled.enabled='1'

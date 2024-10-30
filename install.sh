@@ -68,7 +68,7 @@ uci add_list firewall.@rule[-1].proto='udp'
 uci set firewall.@rule[-1].target='MARK'
 uci set firewall.@rule[-1].set_mark='0x1'
 uci set firewall.@rule[-1].family='ipv4'
-uci commit
+uci commit firewall
 
 echo "chain tproxy_marked {" > /etc/nftables.d/30-xray-tproxy.nft
 echo "  type filter hook prerouting priority filter; policy accept;" >> /etc/nftables.d/30-xray-tproxy.nft

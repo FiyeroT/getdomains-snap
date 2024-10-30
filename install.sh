@@ -55,9 +55,15 @@ echo "#!/bin/sh" > /etc/hotplug.d/iface/30-tproxy
 echo "ip route add local default dev lo table 100" >> /etc/hotplug.d/iface/30-tproxy
 
 printf "\033[32;1mConfigure firewall\033[0m\n"
+rule_id2=$(uci show firewall | grep -E '@rule.*name=.Fake IP via proxy.' | awk -F '[][{}]' '{print $2}' | head -n 1)
+if [ ! -z "$rule_id2" ]; then
+    while uci -q delete firewall.@rule[$rule_id2]; do :; done
+fi
+
+
 uci add firewall rule
 uci set firewall.@rule[-1]=rule
-uci set firewall.@rule[-1].name='Fake IP via proxy2'
+uci set firewall.@rule[-1].name='Fake IP via proxy'
 uci set firewall.@rule[-1].src='lan'
 uci set firewall.@rule[-1].dest='*'
 uci set firewall.@rule[-1].dest_ip='100.96.0.0/16'

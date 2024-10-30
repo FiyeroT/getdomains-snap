@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 printf "\033[32;1mInstalling packeges\033[0m\n"
 opkg update && opkg install curl kmod-nft-tproxy xray-core 
 

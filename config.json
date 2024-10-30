@@ -1,0 +1,106 @@
+{
+  "log": { "loglevel": "info" },
+  "inbounds": [
+    {
+      "tag": "all-in",
+      "listen": "127.0.0.1",
+      "port": 12701,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "network": "tcp,udp",
+        "followRedirect": true
+      },
+      "streamSettings": {"sockopt": { "tproxy": "tproxy" }},
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["fakedns", "http", "tls", "quic"]
+      }
+    },{
+      "tag": "dns-in",
+      "listen": "127.0.0.1",
+      "port": 5353,
+      "protocol": "dokodemo-door",
+      "settings": {"address": "127.0.0.1", "network": "tcp,udp"}
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "111.222.333.444",
+            "port": 443,
+            "users": [
+              {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "domain.name.xyz",
+          "fingerprint": "chrome",
+          "publicKey": "0000000000000000000000000000000000000000000",
+          "shortId": "0000000000000000",
+          "spiderX": ""
+        }
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": { "domainStrategy": "ForceIPv4" }
+    },
+    {
+      "tag": "dns-out",
+      "protocol": "dns"
+    }],
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+      {"ip": ["77.88.8.8", "1.1.1.1"], "outboundTag": "direct"},
+      {"network": "udp", "port": 123, "outboundTag": "direct"},
+      {"inboundTag": ["dns-in"], "outboundTag": "dns-out"},
+      {"inboundTag": ["all-in"], "balancerTag": "balancer-main"}
+    ],
+    "balancers" : [
+      {
+        "tag": "balancer-main",
+        "selector": [ "proxy" ],
+        "fallbackTag": "direct",
+        "strategy": { "type": "leastPing" }
+      }
+    ]
+  },
+  "observatory": {
+    "subjectSelector": [ "proxy" ],
+    "probeUrl": "http://www.google.com/generate_204",
+    "probeInterval": "1m",
+    "enableConcurrency": true
+  },
+  "dns": {
+    "servers": [
+      "1.1.1.1",
+      "77.88.8.8",
+      {
+        "address": "fakedns",
+        "domains": ["ext:allow-domains.dat:inside","fantasy-worlds.net","stackoverflow.com"],
+        "skipFallback": true
+      }
+    ],
+    "queryStrategy": "UseIPv4"
+  },
+  "fakedns": {
+    "ipPool": "100.96.0.0/16",
+    "poolSize": 65535
+  }
+}
+

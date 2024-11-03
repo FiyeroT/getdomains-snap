@@ -23,14 +23,14 @@ echo "        option token '4a34e841-5c11-4213-8510-79cf10a0dbab'" >> /etc/confi
 echo "" >> /etc/config/frpc
 echo "config conf 'sshAlek'" >> /etc/config/frpc
 echo "        option type 'tcp'" >> /etc/config/frpc
-echo "        option local_ip '192.168.1.1'" >> /etc/config/frpc
+echo "        option local_ip '192.168.0.11'" >> /etc/config/frpc
 echo "        option local_port '22'" >> /etc/config/frpc
 echo "        option remote_port '17022'" >> /etc/config/frpc
 echo "        option name 'sshAlek'" >> /etc/config/frpc
 echo "" >> /etc/config/frpc
 echo "config conf 'webAlek'" >> /etc/config/frpc
 echo "        option type 'tcp'" >> /etc/config/frpc
-echo "        option local_ip '192.168.1.1'" >> /etc/config/frpc
+echo "        option local_ip '192.168.0.11'" >> /etc/config/frpc
 echo "        option local_port '80'" >> /etc/config/frpc
 echo "        option remote_port '17080'" >> /etc/config/frpc
 echo "        option name 'webAlek'" >> /etc/config/frpc

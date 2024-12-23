@@ -24,14 +24,14 @@ echo "        option token 'b2140d9d-98fd-4e50-8af1-286147bcf441'" >> /etc/confi
 echo "" >> /etc/config/frpc
 echo "config conf 'sshAlex'" >> /etc/config/frpc
 echo "        option type 'tcp'" >> /etc/config/frpc
-echo "        option local_ip '192.168.200.1'" >> /etc/config/frpc
+echo "        option local_ip '192.168.8.1'" >> /etc/config/frpc
 echo "        option local_port '22'" >> /etc/config/frpc
 echo "        option remote_port '17022'" >> /etc/config/frpc
 echo "        option name 'sshAlex'" >> /etc/config/frpc
 echo "" >> /etc/config/frpc
 echo "config conf 'webAlex'" >> /etc/config/frpc
 echo "        option type 'tcp'" >> /etc/config/frpc
-echo "        option local_ip '192.168.200.1'" >> /etc/config/frpc
+echo "        option local_ip '192.168.8.1'" >> /etc/config/frpc
 echo "        option local_port '80'" >> /etc/config/frpc
 echo "        option remote_port '17080'" >> /etc/config/frpc
 echo "        option name 'webAlex'" >> /etc/config/frpc
